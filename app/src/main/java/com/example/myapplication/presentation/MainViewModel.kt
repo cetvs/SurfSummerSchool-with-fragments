@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.*
 import com.example.domain.usecase.MainUseCases
-import com.example.myapplication.presentation.home.main_screen.PictureInfoListState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -15,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 //@HiltViewModel
-class MainViewModel @Inject constructor(
+class MainViewModel(
     private val mainUseCases: MainUseCases
 ) : ViewModel() {
 
@@ -30,7 +29,7 @@ class MainViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     _state.value = PictureInfoListState(value = result.data ?: emptyList())
-                    viewModelScope.launch(Dispatchers.IO) {
+                     viewModelScope.launch(Dispatchers.IO) {
                         mainUseCases.deleteAllMenuItems()
                         result.data?.let {
                             mainUseCases.insertPicturesInfo(it.map { it.toEntityPictureInfo() })
@@ -60,15 +59,6 @@ class MainViewModel @Inject constructor(
             mainUseCases.getLocalPictureInfo().onEach { _localState.value = it }
         }
     }
-//        mainUseCases.getLocalPictureInfo().onEach { result ->
-//            _localState.value = result
-//        }
-
-//    fun getLocalPictureInfo() {
-//        mainUseCases.getLocalPictureInfo().onEach { result ->
-//            _localState.value = result
-//        }
-//    }
 
     fun getLocalProfileInfo(): ProfileInfo? =
         runBlocking(Dispatchers.IO) {
