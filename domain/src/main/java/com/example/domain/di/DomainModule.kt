@@ -10,7 +10,9 @@ import javax.inject.Singleton
 class DomainModule {
     @Provides
     @Singleton
-    fun provideMenuUseCases(mainRepository: MainRepository): MainUseCases {
+    fun provideMenuUseCases(
+        mainRepository: MainRepository
+    ): MainUseCases {
         return MainUseCases(
             getProfileInfo = GetProfileInfo(mainRepository),
             getPictureInfo = GetPictureInfo(mainRepository),
