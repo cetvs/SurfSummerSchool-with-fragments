@@ -1,7 +1,8 @@
 package com.example.myapplication
 
 import android.app.Application
-//import com.example.di.DaggerDataComponent
+import com.example.di.DataModule
+import com.example.domain.di.DomainModule
 import com.example.myapplication.di.AppComponent
 import com.example.myapplication.di.AppModule
 import com.example.myapplication.di.DaggerAppComponent
@@ -15,9 +16,8 @@ class SurfApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
-//        domainComponent = DaggerDomainComponent.create()
-//        appComponent = DaggerAppComponent.builder().build()
-        appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
-//        dataComponent = DaggerDataComponent.create()
+        appComponent = DaggerAppComponent.builder()
+            .dataModule(DataModule(this))
+            .build()
     }
 }

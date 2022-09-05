@@ -14,10 +14,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class DataModule {
+class DataModule(val app: Application) {
     @Provides
     @Singleton
-    fun provideDatabase(app: Application): AppDatabase {
+    fun provideDatabase(): AppDatabase {
         return Room.databaseBuilder(
             app.applicationContext,
             AppDatabase::class.java,

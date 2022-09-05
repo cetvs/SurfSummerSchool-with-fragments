@@ -10,7 +10,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module(includes = [DomainModule::class, DataModule::class])
-class AppModule(val app: Application) {
+class AppModule() {
     @Provides
     @Singleton
     fun provideMainViewModelFactory(useCases: MainUseCases) : MainViewModelFactory{
