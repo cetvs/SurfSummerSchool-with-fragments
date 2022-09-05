@@ -2,7 +2,7 @@ package com.example.myapplication.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.domain.usecase.MainUseCases
+import com.example.myapplication.domain.usecase.MainUseCases
 
 class MainViewModelFactory(val mainUseCases: MainUseCases) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")

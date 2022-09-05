@@ -1,6 +1,6 @@
 package com.example.myapplication.presentation
 
-import com.example.domain.model.PictureInfo
+import com.example.myapplication.domain.model.PictureInfo
 
 data class PictureInfoListState(
     val value : List<PictureInfo> = emptyList(),

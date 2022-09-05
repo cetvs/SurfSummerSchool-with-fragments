@@ -3,14 +3,8 @@ package com.example.myapplication.presentation
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.domain.model.*
-import com.example.domain.usecase.MainUseCases
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import com.example.myapplication.domain.usecase.MainUseCases
+import com.example.myapplication.domain.model.EntityPictureInfo
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
