@@ -19,8 +19,6 @@ class MainActivity() : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         (applicationContext as SurfApp).appComponent.inject(this)
         mainViewModel = ViewModelProvider(this, vmFactory).get(MainViewModel::class.java)
-//        val textView = findViewById<TextView>(R.id.text_view)
-
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
