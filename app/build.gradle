@@ -71,6 +71,10 @@ dependencies {
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 
+    //Fragment Navigation
+//    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+//    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
+
     // Models
     implementation project(path: ':domain')
     implementation project(path: ':data')

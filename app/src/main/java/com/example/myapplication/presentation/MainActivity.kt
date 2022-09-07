@@ -1,12 +1,11 @@
 package com.example.myapplication.presentation
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.SurfApp
-import com.example.myapplication.presentation.main.MainFragment
+import com.example.myapplication.presentation.main.BottomNavigationFragment
 import javax.inject.Inject
 
 class MainActivity() : AppCompatActivity() {
@@ -22,7 +21,7 @@ class MainActivity() : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, MainFragment.newInstance())
+                .replace(R.id.main_container, BottomNavigationFragment.newInstance())
                 .commitNow()
         }
     }
