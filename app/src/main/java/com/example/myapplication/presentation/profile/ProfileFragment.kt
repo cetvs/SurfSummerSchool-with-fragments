@@ -13,7 +13,6 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.v("prof", "prof")
         return inflater.inflate(R.layout.profile_fragment, container, false)
     }
 }

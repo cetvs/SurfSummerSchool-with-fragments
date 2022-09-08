@@ -9,4 +9,5 @@
     <string name="phone">Телефон</string>
     <string name="email">Почта</string>
     <string name="profile">Профиль</string>
+    <string name="gallery">Галерея</string>
 </resources>
