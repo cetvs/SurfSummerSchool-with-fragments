@@ -21,8 +21,10 @@ class DomainModule {
             getLocalPictureInfo = GetLocalPictureInfo(mainRepository),
             insertProfileInfo = InsertProfileInfo(mainRepository),
             insertPicturesInfo = InsertPicturesInfo(mainRepository),
+            insertEntityPicturesInfoToDatabase = InsertEntityPicturesInfoToDatabase(mainRepository),
             deleteProfileInfo = DeleteProfileInfo(mainRepository),
             deleteAllMenuItems = DeleteAllMenuItems(mainRepository),
+            updateFavoriteInfo = UpdateFavoriteInfo(mainRepository)
         )
     }
 }

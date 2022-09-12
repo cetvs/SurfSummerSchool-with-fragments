@@ -8,6 +8,8 @@ class MainUseCases(
     val getLocalPictureInfo: GetLocalPictureInfo,
     val insertProfileInfo: InsertProfileInfo,
     val insertPicturesInfo: InsertPicturesInfo,
+    val insertEntityPicturesInfoToDatabase: InsertEntityPicturesInfoToDatabase,
     val deleteProfileInfo: DeleteProfileInfo,
-    val deleteAllMenuItems: DeleteAllMenuItems
+    val deleteAllMenuItems: DeleteAllMenuItems,
+    val updateFavoriteInfo: UpdateFavoriteInfo
 )

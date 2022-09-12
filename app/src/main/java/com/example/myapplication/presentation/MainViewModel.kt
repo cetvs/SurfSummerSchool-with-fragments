@@ -1,12 +1,13 @@
 package com.example.myapplication.presentation
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.*
 import com.example.domain.usecase.MainUseCases
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -16,28 +17,29 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     val mainUseCases: MainUseCases
 ) : ViewModel() {
-    private val _state = mutableStateOf(PictureInfoListState())
-    val state: State<PictureInfoListState> = _state
-
-    private val _localState = mutableStateOf(listOf<EntityPictureInfo>())
-    val localState: State<List<EntityPictureInfo>> = _localState
+    private val mutableLiveData = MutableLiveData<PictureInfoListState>()
+    val liveData: LiveData<PictureInfoListState> = mutableLiveData
 
     fun getPictureInfo(token: String) {
         mainUseCases.getPictureInfo(token).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _state.value = PictureInfoListState(value = result.data ?: emptyList())
-                     viewModelScope.launch(Dispatchers.IO) {
-                        mainUseCases.deleteAllMenuItems()
+                    val wait = viewModelScope.async(Dispatchers.IO) {
                         result.data?.let {
-                            mainUseCases.insertPicturesInfo(it.map { it.toEntityPictureInfo() })
+                            mainUseCases.insertEntityPicturesInfoToDatabase(
+                                it.map { pictureInfo -> pictureInfo.toEntityPictureInfo() }
+                            )
                         }
                     }
+                    wait.await()
+                    mainUseCases.getLocalPictureInfo().onEach {
+                        mutableLiveData.postValue(PictureInfoListState(value = it))
+                    }.launchIn(viewModelScope)
                 }
                 is Resource.Error ->
-                    _state.value = PictureInfoListState(error = "internet error")
+                    mutableLiveData.postValue(PictureInfoListState(error = "internet error"))
                 is Resource.Loading ->
-                    _state.value = PictureInfoListState(isLoading = true)
+                    mutableLiveData.postValue(PictureInfoListState(isLoading = true))
             }
         }.launchIn(viewModelScope)
     }
@@ -54,7 +56,7 @@ class MainViewModel @Inject constructor(
 
     fun getLocalPictureInfo(){
         runBlocking(Dispatchers.IO){
-            mainUseCases.getLocalPictureInfo().onEach { _localState.value = it }
+//            mainUseCases.getLocalPictureInfo().onEach { mutableLocalPictureInfo.postValue(it) }
         }
     }
 
@@ -74,4 +76,15 @@ class MainViewModel @Inject constructor(
             mainUseCases.deleteProfileInfo()
         }
     }
+
+    fun updateFavoriteInfo(pictureInfo: EntityPictureInfo) {
+        viewModelScope.launch(Dispatchers.IO) {
+            mainUseCases.updateFavoriteInfo(pictureInfo)
+        }
+    }
+
+//    fun updateRemoveFavoriteInfo(): ProfileInfo? =
+//        runBlocking(Dispatchers.IO) {
+//            mainUseCases.getLocalProfileInfo()
+//        }
 }

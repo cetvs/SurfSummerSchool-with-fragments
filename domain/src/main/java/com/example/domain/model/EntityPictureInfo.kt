@@ -4,17 +4,18 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import java.sql.Date
 
 @Parcelize
 @Entity(tableName = "pictureInfo")
 data class EntityPictureInfo(
     @PrimaryKey
-    val id: String,
+    val id: Int,
     val title: String,
     val content: String,
     val photoUrl: String,
     val publicationDate: Long,
-    val FavoriteDate: String
+    val favoriteDate: Date?
 ) : Parcelable
 
 fun PictureInfo.toEntityPictureInfo(): EntityPictureInfo =
@@ -24,5 +25,5 @@ fun PictureInfo.toEntityPictureInfo(): EntityPictureInfo =
         content = this.content,
         photoUrl = this.photoUrl,
         publicationDate = this.publicationDate,
-        FavoriteDate = "21",
+        favoriteDate = null,
     )

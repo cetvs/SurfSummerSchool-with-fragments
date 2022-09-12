@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class PictureInfo(
-    val id: String,
+    val id: Int,
     val title: String,
     val content: String,
     val photoUrl: String,

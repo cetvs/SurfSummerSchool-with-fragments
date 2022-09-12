@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.myapplication"
-        minSdk 22
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -71,9 +71,15 @@ dependencies {
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 
-    //Fragment Navigation
+    // View
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Fragment Navigation
 //    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
 //    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
+
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
 
     // Models
     implementation project(path: ':domain')

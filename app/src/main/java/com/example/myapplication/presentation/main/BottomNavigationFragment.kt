@@ -14,14 +14,10 @@ import com.example.myapplication.presentation.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BottomNavigationFragment : Fragment() {
-    lateinit var customRecyclerAdapter :CustomRecyclerAdapter
-    lateinit var recyclerView : RecyclerView
 
     companion object {
         fun newInstance() = BottomNavigationFragment()
     }
-
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,15 +59,6 @@ class BottomNavigationFragment : Fragment() {
         }
         buttonNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-//        recyclerView = view?.findViewById(R.id.main_rv)!!
-//        recyclerView.layoutManager = LinearLayoutManager(activity)
-//        customRecyclerAdapter = CustomRecyclerAdapter(viewModel.getExampleMovie())
-//        recyclerView.adapter = customRecyclerAdapter
     }
 
 }

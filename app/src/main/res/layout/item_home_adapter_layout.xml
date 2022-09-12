@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/home_image_iv"
+            android:id="@+id/favorite_image_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -27,16 +27,16 @@
             android:textColor="@color/black"
             android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_image_iv" />
+            app:layout_constraintTop_toBottomOf="@+id/favorite_image_iv" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/favorite_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/home_image_iv"
-            app:layout_constraintTop_toTopOf="@+id/home_image_iv"
+            app:layout_constraintEnd_toEndOf="@+id/favorite_image_iv"
+            app:layout_constraintTop_toTopOf="@+id/favorite_image_iv"
             app:srcCompat="@drawable/ic_unfavorite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

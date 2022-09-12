@@ -1,5 +1,6 @@
 package com.example.data.repository
 
+import androidx.room.Update
 import com.example.data.source.local.AppDao
 import com.example.data.source.remote.SimpleApi
 import com.example.domain.model.EntityPictureInfo
@@ -8,6 +9,7 @@ import com.example.domain.model.ProfileInfo
 import com.example.domain.repository.MainRepository
 import com.example.domain.model.ProfileRequestBody
 import kotlinx.coroutines.flow.Flow
+import java.sql.Date
 
 class MainRepositoryImpl(
     private val appDao: AppDao,
@@ -35,6 +37,18 @@ class MainRepositoryImpl(
     }
 
     override fun insertPicturesInfo(picturesInfo: List<EntityPictureInfo>) {
+//        appDao.insertPicturesInfo(picturesInfo)
+    }
+
+    override fun checkEntityPictureInfo(id: Int) : Date? {
+        return appDao.checkFavoriteDate(id)
+    }
+
+    override fun updateEntityPictureInfo(picturesInfo: EntityPictureInfo) {
+        appDao.updatePictureInfo(picturesInfo)
+    }
+
+    override fun insertPictureInfo(picturesInfo: EntityPictureInfo) {
         appDao.insertPicturesInfo(picturesInfo)
     }
 
@@ -45,5 +59,4 @@ class MainRepositoryImpl(
     override fun deleteAllMenuItems() {
         appDao.deleteAllMenuItems()
     }
-
 }

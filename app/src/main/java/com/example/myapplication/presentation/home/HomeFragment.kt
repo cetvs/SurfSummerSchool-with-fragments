@@ -2,48 +2,75 @@ package com.example.myapplication.presentation.home
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.domain.model.EntityPictureInfo
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myapplication.R
+import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.common.SpacesItemDecoration
-import com.example.myapplication.presentation.main.CustomRecyclerAdapter
 
 class HomeFragment : Fragment() {
-    lateinit var customRecyclerAdapter : CustomRecyclerAdapter
-    lateinit var recyclerView : RecyclerView
-    lateinit var mContext: Context
+    lateinit var homeRecyclerAdapter: HomeRecyclerAdapter
+    lateinit var recyclerView: RecyclerView
+    lateinit var mainViewModel: MainViewModel
+    lateinit var thisContext: Context
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mContext = context
+        thisContext = context
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.home_rv)
-//        val customRecyclerAdapter = CustomRecyclerAdapter(viewModel.getExampleMovie())
+        val recyclerView = view.findViewById<RecyclerView>(R.id.favorite_rv)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        val token = mainViewModel.getLocalProfileInfo()?.token
 
-        val ent = EntityPictureInfo("1", "картин", "32", "#2", 1,"1")
-        val lst = listOf<EntityPictureInfo>(ent, ent.copy(id = "2"), ent.copy(id = "3"), ent.copy(id = "4"))
-        val customRecyclerAdapter = CustomRecyclerAdapter(lst)
-
-        recyclerView?.adapter = customRecyclerAdapter
-        recyclerView?.layoutManager = GridLayoutManager(mContext, 2)
+        homeRecyclerAdapter = HomeRecyclerAdapter(listOf(), mainViewModel)
+        mainViewModel.liveData.observe(viewLifecycleOwner) {
+            when {
+                it.isLoading -> parentFragmentManager
+                    .beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.bottom_navigation_container, LoadingFragment())
+                    .commit()
+                else -> homeRecyclerAdapter.setData(it.value)
+            }
+        }
+        mainViewModel.getPictureInfo(token!!)
+        recyclerView?.adapter = homeRecyclerAdapter
+        recyclerView?.layoutManager = GridLayoutManager(thisContext, 2)
         recyclerView.addItemDecoration(SpacesItemDecoration(10))
+
+        val searchImageView = view.findViewById<ImageView>(R.id.search_iv)
+        searchImageView.setOnClickListener(this.onCreateSearchViewListener())
+
+        val swipeContainer = view.findViewById<SwipeRefreshLayout>(R.id.swipe_container)
+        swipeContainer.setOnRefreshListener {
+            mainViewModel.getPictureInfo(token)
+            swipeContainer.isRefreshing = false
+        }
     }
+
+    private fun onCreateSearchViewListener(): View.OnClickListener = View.OnClickListener {
+        parentFragmentManager
+            .beginTransaction()
+            .addToBackStack("home_fragment")
+            .replace(R.id.bottom_navigation_container, SearchFragment())
+            .commit()
+    }
+
 }
