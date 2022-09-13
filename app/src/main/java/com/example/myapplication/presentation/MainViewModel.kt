@@ -82,9 +82,4 @@ class MainViewModel @Inject constructor(
             mainUseCases.updateFavoriteInfo(pictureInfo)
         }
     }
-
-//    fun updateRemoveFavoriteInfo(): ProfileInfo? =
-//        runBlocking(Dispatchers.IO) {
-//            mainUseCases.getLocalProfileInfo()
-//        }
 }

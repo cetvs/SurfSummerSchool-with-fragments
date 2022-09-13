@@ -2,6 +2,7 @@ package com.example.myapplication.presentation.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myapplication.R
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.common.SpacesItemDecoration
+import com.example.myapplication.presentation.home.search.SearchFragment
 
 class HomeFragment : Fragment() {
     lateinit var homeRecyclerAdapter: HomeRecyclerAdapter
@@ -36,7 +38,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.favorite_rv)
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         val token = mainViewModel.getLocalProfileInfo()?.token
 
         homeRecyclerAdapter = HomeRecyclerAdapter(listOf(), mainViewModel)
@@ -47,7 +49,10 @@ class HomeFragment : Fragment() {
                     .addToBackStack(null)
                     .replace(R.id.bottom_navigation_container, LoadingFragment())
                     .commit()
-                else -> homeRecyclerAdapter.setData(it.value)
+                else -> {
+                    Log.v("liveDate", it.value[0].toString())
+                    homeRecyclerAdapter.setData(it.value)
+                }
             }
         }
         mainViewModel.getPictureInfo(token!!)
@@ -68,9 +73,8 @@ class HomeFragment : Fragment() {
     private fun onCreateSearchViewListener(): View.OnClickListener = View.OnClickListener {
         parentFragmentManager
             .beginTransaction()
-            .addToBackStack("home_fragment")
             .replace(R.id.bottom_navigation_container, SearchFragment())
+            .addToBackStack("home_fragment")
             .commit()
     }
-
 }
