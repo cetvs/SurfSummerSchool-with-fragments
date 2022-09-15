@@ -23,7 +23,7 @@ class LoadingFragment : Fragment() {
         val mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         mainViewModel.liveData.observe(viewLifecycleOwner) {
             when {
-                !it.isLoading -> parentFragmentManager
+                !it.isLoading && it.value.isNotEmpty() -> parentFragmentManager
                     .beginTransaction()
                     .addToBackStack(null)
                     .replace(R.id.bottom_navigation_container, HomeFragment())

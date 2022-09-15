@@ -1,6 +1,5 @@
 package com.example.myapplication.presentation.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,20 +18,20 @@ class HomeRecyclerAdapter(
 ) : RecyclerView.Adapter<HomeRecyclerAdapter.CustomRecyclerHolder>() {
 
     inner class CustomRecyclerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameTextView: TextView = itemView.findViewById(R.id.name_tv)
-        private val homeImageView: ImageView = itemView.findViewById(R.id.favorite_image_iv)
-        private val favImageView: ImageView = itemView.findViewById(R.id.favorite_iv)
+        private val nameTextView: TextView = itemView.findViewById(R.id.item_home_name_tv)
+        private val pictureImageView: ImageView = itemView.findViewById(R.id.item_home_picture_iv)
+        private val favImageView: ImageView = itemView.findViewById(R.id.item_home_favorite_iv)
 
         fun bind(pictureInfo: EntityPictureInfo) {
             nameTextView.text = pictureInfo.title
-            Picasso.get().load(pictureInfo.photoUrl).into(homeImageView)
+            Picasso.get().load(pictureInfo.photoUrl).into(pictureImageView)
             if (pictureInfo.favoriteDate == null) {
                 favImageView.setImageResource(R.drawable.ic_unfavorite)
             } else {
                 favImageView.setImageResource(R.drawable.ic_favorite)
             }
             favImageView.setOnClickListener {
-                val favoriteImageView = itemView.findViewById<ImageView>(R.id.favorite_iv)
+                val favoriteImageView = itemView.findViewById<ImageView>(R.id.item_home_favorite_iv)
                 if (pictureInfo.favoriteDate == null) {
                     favoriteImageView.setImageResource(R.drawable.ic_favorite)
                     val localDate = LocalDate.now()

@@ -19,23 +19,21 @@ class FavoriteRecyclerAdapter(
 ) : RecyclerView.Adapter<FavoriteRecyclerAdapter.CustomRecyclerHolder>() {
 
     inner class CustomRecyclerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameTextView: TextView = itemView.findViewById(R.id.name_tv)
-        private val homeImageView: ImageView = itemView.findViewById(R.id.favorite_image_iv)
-        private val favImageView: ImageView = itemView.findViewById(R.id.favorite_iv)
+        private val nameTextView: TextView = itemView.findViewById(R.id.item_home_name_tv)
+        private val pictureImageView: ImageView = itemView.findViewById(R.id.item_home_picture_iv)
+        private val favImageView: ImageView = itemView.findViewById(R.id.item_favorite_favorite_iv)
 
         fun bind(pictureInfo: EntityPictureInfo) {
             nameTextView.text = pictureInfo.title
-            Picasso.get().load(pictureInfo.photoUrl).into(homeImageView)
+            Picasso.get().load(pictureInfo.photoUrl).into(pictureImageView)
             if (pictureInfo.favoriteDate == null) {
-                Log.v("favorite ${pictureInfo.title}", "fav")
                 favImageView.setImageResource(R.drawable.ic_unfavorite)
             } else {
-                Log.v("favorite ${pictureInfo.title}", "unfav")
                 favImageView.setImageResource(R.drawable.ic_favorite)
             }
 
             favImageView.setOnClickListener {
-                val favoriteImageView = itemView.findViewById<ImageView>(R.id.favorite_iv)
+                val favoriteImageView = itemView.findViewById<ImageView>(R.id.item_favorite_favorite_iv)
                 if (favoriteImageView?.tag == R.drawable.ic_unfavorite) {
                     favoriteImageView.setImageResource(R.drawable.ic_favorite)
                     favoriteImageView.tag = R.drawable.ic_favorite

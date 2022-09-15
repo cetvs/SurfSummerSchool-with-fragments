@@ -37,8 +37,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.favorite_rv)
-        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        val recyclerView = view.findViewById<RecyclerView>(R.id.home_rv)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         val token = mainViewModel.getLocalProfileInfo()?.token
 
         homeRecyclerAdapter = HomeRecyclerAdapter(listOf(), mainViewModel)
@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
                     .replace(R.id.bottom_navigation_container, LoadingFragment())
                     .commit()
                 else -> {
-                    Log.v("liveDate", it.value[0].toString())
+                    Log.v("live", it.value.toString())
                     homeRecyclerAdapter.setData(it.value)
                 }
             }
@@ -73,8 +73,8 @@ class HomeFragment : Fragment() {
     private fun onCreateSearchViewListener(): View.OnClickListener = View.OnClickListener {
         parentFragmentManager
             .beginTransaction()
-            .replace(R.id.bottom_navigation_container, SearchFragment())
             .addToBackStack("home_fragment")
+            .replace(R.id.bottom_navigation_container, SearchFragment())
             .commit()
     }
 }
