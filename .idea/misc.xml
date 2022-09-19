@@ -17,14 +17,17 @@
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/drawable/bg_white_rounded.xml" value="0.3675" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/drawable/bnv_tab_item_foreground.xml" value="0.3675" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/drawable/ic_close_circle_line.xml" value="0.3675" />
+        <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/drawable/ic_empty_request_result_screen.xml" value="0.3275" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/drawable/ic_favorite.xml" value="0.3675" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/drawable/ic_loader.xml" value="0.3675" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/drawable/ic_main.xml" value="0.3635" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/drawable/ic_profile.xml" value="0.3635" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/drawable/ic_search_15.xml" value="0.3675" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/drawable/ic_vector_favorite.xml" value="0.3635" />
+        <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/Search_recycler_fragment.xml" value="0.3523550724637681" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/blank_request_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/blank_request_result_fragment.xml" value="0.3523550724637681" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/bottom_navigation_fragment.xml" value="0.25" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/favorite_fragment.xml" value="0.29797979797979796" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/find_request_fragment.xml" value="0.3523550724637681" />
@@ -37,7 +40,7 @@
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/main_activity.xml" value="0.25" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/main_fragment.xml" value="0.14" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/profile_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/search_fragment.xml" value="0.1" />
+        <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/layout/search_fragment.xml" value="0.2" />
         <entry key="..\:/android/SurfSummerSchool-with-fragments/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3439153439153439" />
       </map>
     </option>
